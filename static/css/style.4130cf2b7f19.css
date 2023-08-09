@@ -1,0 +1,183 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #282e39;
+    color: #c9c9c9;
+}
+.head {
+    background-color: #020b18;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.header-inner {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    color:white;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.top-left .top-left-links {
+    display: grid;
+    text-align: left;
+    grid-template-columns: repeat(4, 1fr);
+    transition: color 0.5s ease;
+    height: 100%;
+
+}
+
+.top-left-link {
+    align-self: center;
+}
+.top-right-link {
+    align-self: center;
+    justify-self: end;
+}
+
+.link {
+    font-family: 'Rubik', serif;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.top-left .top-left-links .dropdown-link {
+    font-family: 'Rubik', serif;
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    font-size: 14px;
+    text-align: left;
+}
+
+
+.top-right .top-right-links {
+    display: grid;
+    height: 100%;
+}
+
+.footer {
+    background-color: #020b18;
+}
+.footer .social-media {
+    text-align: center;
+}
+.footer .social-media img{
+    width: 3%;
+    padding: 1% 0.25% 0 0.25%;
+}
+.footer .copyright {
+    font-family: 'Rubik', serif;
+    color: white;
+    text-align: center;
+}
+.footer .icons {
+    text-align: right;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+.footer .icons a {
+    font-family: 'Rubik', serif;
+    color: white;
+    text-decoration: none;
+
+}
+
+
+
+
+
+
+
+/* Контейнер <div> - необходим для размещения выпадающего содержимого */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Выпадающее содержимое (скрыто по умолчанию) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Ссылки внутри выпадающего списка */
+.dropdown-content a {
+    font-family: 'Rubik', serif;
+    font-size: 12px;
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+/* Изменение цвета выпадающих ссылок при наведении курсора */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Показать выпадающее меню при наведении курсора */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Изменение цвета фона кнопки раскрывающегося списка при отображении содержимого раскрывающегося списка */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+.menu {
+    display: none;
+    opacity: 0; /* Устанавливаем начальную прозрачность для транзиции */
+    transition: opacity 0.5s ease;
+}
+
+@media screen and (max-width: 1024px) {
+    .top-left-links {
+        display: none !important;
+    }
+    .top-right-links {
+        display: none !important;
+    }
+    .top-right-menu {
+        display: grid !important;
+        height: 100%;
+    }
+    .menu-button {
+        display: grid;
+        cursor: pointer;
+        align-self: center;
+        justify-self: end;
+    }
+    .gg-menu {
+        align-self: center;
+        justify-self: center;
+    }
+    .link {
+        font-size: 24px;
+        text-align: left;
+    }
+    .drop-link {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .drop-link div {
+        text-align: left;
+    }
+    .divider {
+        align-self: center;
+        padding-left: 10px;
+    }
+    .dropdown-link {
+        text-align: left;
+        display: inline-block;
+        font-family: 'Rubik', serif;
+        text-decoration: none;
+        color: white;
+        padding: 10px 0 10px 0;
+        font-size: 20px;
+    }
+    .footer .social-media img{
+        width: 10%;
+    }
+}

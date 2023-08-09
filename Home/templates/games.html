@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}ITGGames{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/games_style.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="title-text">
+            <h2>Our games</h2>
+        </div>
+        <div class="games">
+            {% for game in games %}
+                <div class="game">
+                    <a href="{% url 'game' slug=game.slug %}" class="game-link">
+                        <div class="name">
+                            {{ game.name }}
+                        </div>
+                        <div class="main-photo">
+                            <img src="{{ game.main_photo.url }}" alt="{{ game.name }}">
+                        </div>
+                        <div class="description">
+                            {{ game.short_description|safe }}
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

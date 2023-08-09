@@ -1,0 +1,71 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+{% block title %}
+    Upload Image
+{% endblock %}
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">Home</a>
+        >
+        <a href="{% url 'game' game.slug %}">{{ game.name }}</a>
+        {% block breadcrumb %}{% endblock %}
+    </div>
+{% endblock %}
+{% block extrastyle %}
+    <style>
+        img {
+            height: 200px;
+            width: 200px;
+        }
+        button {
+            display: inline-block;
+            background: #5BC0DE; /* Use the desired color */
+            color: #fff;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            border: 1px solid #46b8da; /* Use the desired border color */
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="images" multiple>
+        <button>Upload</button>
+    </form>
+    <br>
+    <hr>
+    <br>
+<div class="sortable">
+    {% for img in images|dictsort:"sequence" %}
+        <div class="sortable-item" data-image-id="{{ img.id }}">
+            <img src="{{ img.images.url }}" alt="Image">
+        </div>
+    {% endfor %}
+</div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <script>
+    const updateSequenceURL = "{% url 'update_sequence_game' %}";
+    const csrfToken = getCookie('csrftoken');
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === name + '=') {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+    <script src="{% static 'js/upload_game_index.js' %}"></script>
+
+{% endblock %}

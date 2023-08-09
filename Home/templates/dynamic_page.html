@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}ITGGames{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/dynamic_page_style.css' %}">
+    <style>
+        body {
+            background-color: {{ page.background_color }} !important;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="title">
+            <h1>{{ page.title }}</h1>
+        </div>
+        <div class="image">
+            {% if page.image %}
+                <img src="{{ page.image.url }}" alt="{{ page.title }}">
+            {% endif %}
+        </div>
+        <div class="text">
+            {{ page.text|safe }}
+        </div>
+
+    </div>
+{% endblock %}

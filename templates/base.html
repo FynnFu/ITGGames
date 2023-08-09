@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
+    <script src="{% static 'js/fontawesome.js' %}" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="{% static 'icon/favicon.ico' %}">
+</head>
+<body>
+    <div class="head">
+        <div class="header-inner">
+            <div class="top-left">
+                <div class="top-left-links">
+                {% for link in request.menuLink %}
+                    {% if link.visible %}
+                        {% if link.dropdown %}
+                            <div class="dropdown top-left-link">
+                                <a href="{{ link.get_absolute_url }}" {% if link.target %}target="_blank"{% endif %} class="link">{{ link.text }}</a>
+                                <div class="dropdown-content">
+                                    {% for dropdownLink in request.menuDropdownLink %}
+                                        {% if dropdownLink.link == link %}
+                                            <a href="{{ dropdownLink.get_absolute_url }}" {% if dropdownLink.target %}target="_blank"{% endif %} class="dropdown-link">{{ dropdownLink }}</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="top-left-link">
+                                <a href="{{ link.get_absolute_url }}" {% if link.target %}target="_blank"{% endif %} class="link">{{ link }}</a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+            <div class="top-center">
+                {% for logo in request.imageLogo %}
+                    <img src="{{ logo.image.url }}" alt="ITGGames" style="width: {{ logo.width }}px; height: {{ logo.height }}px">
+                {% endfor %}
+            </div>
+            <div class="top-right">
+                <div class="top-right-links">
+                    <div class="dropdown top-right-link">
+                        <a href="#" class="link">TEAM</a>
+                    </div>
+                </div>
+                <div class="top-right-menu" style="display: none">
+
+                    <div class="menu-button" id="menu-button" style="width: 50px; height: 50px;"><i class="gg-menu fa-solid fa-bars fa-2xl"></i></div>
+                </div>
+            </div>
+            <div class="menu" id="menu">
+                {% for link in request.menuLink %}
+                    {% if link.visible %}
+                        {% if link.dropdown %}
+                            <a href="{{ link.get_absolute_url }}" class="link">{{ link.text }}</a>
+                            {% for dropdownLink in request.menuDropdownLink %}
+                                {% if dropdownLink.link == link %}
+                                    <div class="drop-link">
+                                        <div class="divider">
+                                            <hr>
+                                        </div>
+                                        <div>
+                                            <a href="{{ dropdownLink.get_absolute_url }}" class="dropdown-link">{{ dropdownLink }}</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <a href="{{ link.get_absolute_url }}" class="link">{{ link }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+    {% block content %}
+    {% endblock %}
+    <div class="footer">
+        <div class="social-media" id="social">
+            {% for socialMedia in request.footerSocialMedia %}
+                <a href="{{ socialMedia.link }}" target="_blank"><img src="{{ socialMedia.image.url }}" alt="socialMedia.alt"></a>
+            {% endfor %}
+        </div>
+        <div class="copyright">
+            <p>© ITGGames 2023. All rights reserved</p>
+        </div>
+        <div class="icons">
+            <a href="https://www.flaticon.com/">Icons</a>
+        </div>
+    </div>
+    <script src="{% static 'js/index.js' %}"></script>
+
+</body>
+</html>

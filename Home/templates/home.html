@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}ITGGames{% endblock %}
+{% block head %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="{% static 'css/home_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animation_button.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="hello-button" style="display: none">
+        <div class="our-games-div">
+            <a href="{% url 'games' %}"><span>OUR GAMES</span></a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="sort-controls">
+            <div class="sort-controls-menu">
+                <div>
+                    <p id="news_sorting">news sorting</p>
+                </div>
+                <div>
+                    <button id="copy_url" class="copy_url">
+                        <i class="fa-regular fa-clipboard"></i> <span>Copy URL</span>
+                    </button>
+                </div>
+            </div>
+            <div class="sort-controls-selects">
+                <div class="sort-controls-select">
+                    <label for="sort-by">Sort by:</label>
+                    <select id="sort-by">
+                        {% for sort_by in sort_by_list %}
+                            <option value="{{ sort_by.value }}">{{ sort_by.text }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <hr>
+                <div class="sort-controls-select">
+                    <label for="sort-by">Sort direction:</label>
+                    <select id="sort-direction">
+                        <option value="ascending">Ascending</option>
+                        <option value="descending">Descending</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="all-news">
+            {% for news in news_list %}
+                <div class="news" data-news-id="{{ news.id }}">
+                    <div class="title">
+                        {{ news.title }}
+                    </div>
+                    <div class="text-image">
+                        <div class="text">
+                            {{ news.short_text }}
+                        </div>
+                        {% if news.main_image %}
+                            <div class="image">
+                                <img src="{{ news.main_image.url }}" alt="{{ news.title }}">
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="stats">
+                        <div class="up">
+                            <i class="fa-regular fa-circle-up up-i"></i> <span>{{ news.up }}</span>
+                        </div>
+                        <div class="down">
+                            <i class="fa-regular fa-circle-down down-i"></i> <span>{{ news.down }}</span>
+                        </div>
+                        <div>
+                            <div class="views">
+                                <i class="fa-regular fa-eye">&nbsp;</i><span>{{ news.views }}</span>
+                            </div>
+                            <div class="created_date">
+                                {{ news.created_date.date }}
+                            </div>
+                        </div>
+                        <div class="container">
+                            <a href="{% url 'news' news.slug %}" class="btn">Read more</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+    const upUrl = "{% url 'up_update_news' %}";
+    const downUrl = "{% url 'down_update_news' %}";
+    const markNewsViewedUrl = "{% url 'mark_news_viewed' %}";
+    const homeUrl = "{% url 'home' %}"
+    const csrfToken = getCookie('csrftoken');
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === name + '=') {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <script src="{% static 'js/news_index.js' %}"></script>
+    <script src="{% static 'js/home_index.js' %}"></script>
+
+{% endblock %}
