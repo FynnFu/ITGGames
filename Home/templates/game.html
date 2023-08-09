@@ -31,7 +31,7 @@
                 <div id="videoPreview"></div>
 
                 {% for img in game.multipleimagegame_set.all|dictsort:"sequence" %}
-                    <div><img src="{{ img.images.url }}" class="thumbnail" alt="Thumbnail 2"></div>
+                    <div><img src="{{ img.images.url }}" class="thumbnail" alt="Thumbnail"></div>
                 {% endfor %}
             </div>
         </div>
