@@ -156,11 +156,24 @@
     }
     .news-details .game-short-text .image {
     }
-    .news-details .news-short-text .stats {
+    .stats {
         height: 50%;
     }
-    .news-details .news-short-text .text {
+    .fa-circle-up,
+    .up span,
+    .fa-circle-down,
+    .down span {
+        font-size: 48px;
+    }
+
+    .text {
         height: 50%;
+    }
+
+    .text div i,
+    .text div span,
+    .p-created-date {
+        font-size: 36px;
     }
 
     .description {

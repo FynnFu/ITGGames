@@ -3,6 +3,11 @@
     background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949;
 }
 
+.game {
+    background-color: #1E2230FF;
+    padding: 5%;
+}
+
 .path a {
     font-family: 'Rubik', serif;
     color: white;
@@ -107,7 +112,7 @@
     font-family: 'Rubik', serif;
 }
 .game-details .game-short-description .p-release_date span{
-    color: darkslateblue;
+    color: hsl(200 calc(1*100%) 49.4%/1);
 }
 
 .description {
@@ -190,6 +195,7 @@
         flex: 2;
         width: 100%;
         height: auto;
+        font-size: 18px;
     }
     .steam {
         width: 100%;
@@ -201,5 +207,6 @@
     .system-button {
         flex: 1;
         padding: 10px;
+        font-size: 18px;
     }
 }

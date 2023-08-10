@@ -24,37 +24,35 @@
                     {% endfor %}
                 </div>
             </div>
-                <div class="news-short-text">
-                    <div class="image">
-                        <img src="{{ news.main_image.url }}" alt="{{ news.title }}">
+            <div class="news-short-text">
+                <div class="image">
+                    <img src="{{ news.main_image.url }}" alt="{{ news.title }}">
+                </div>
+                <div>
+                    <div class="stats">
+                        <div class="up">
+                            <i class="fa-regular fa-circle-up up-i"></i> <span>{{ news.up }}</span>
+                        </div>
+                        <div class="down">
+                            <i class="fa-regular fa-circle-down down-i"></i> <span>{{ news.down }}</span>
+                        </div>
                     </div>
+                    <div class="text">
                         <div>
-                            <div class="stats">
-                            <div class="up">
-                                <i class="fa-regular fa-circle-up up-i"></i> <span>{{ news.up }}</span>
-                            </div>
-                           <div class="down">
-                                <i class="fa-regular fa-circle-down down-i"></i> <span>{{ news.down }}</span>
-                            </div>
+                            <i class="fa-regular fa-eye">&nbsp;</i><span>{{ news.views }}</span>
                         </div>
-                        <div class="text">
-                            <div>
-                                <i class="fa-regular fa-eye">&nbsp;</i><span>{{ news.views }}</span>
-                            </div>
-                            <div>
-                                <p class="p-created-date"><span>{{ news.created_date.date }}</span></p>
-                            </div>
+                        <div>
+                            <p class="p-created-date"><span>{{ news.created_date.date }}</span></p>
                         </div>
                     </div>
-
                 </div>
             </div>
-            <div class="description">
-                {{ news.text|safe }}
-            </div>
         </div>
-
+        <div class="description">
+            {{ news.text|safe }}
+        </div>
     </div>
+</div>
 <script>
     const upUrl = "{% url 'up_update_news' %}";
     const downUrl = "{% url 'down_update_news' %}";

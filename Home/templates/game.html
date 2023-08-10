@@ -6,92 +6,87 @@
 {% endblock %}
 {% block content %}
 <div class="content">
-    <div class="path">
-        <a href="{% url 'games' %}">Games</a> >
-        <a href="{% url 'genre' game.genre.slug %}">{{ game.genre.name }}</a> >
-        <a href="{% url 'game' game.slug %}">{{ game.name }}</a>
-    </div>
-    <div class="name">
-        {{ game.name }}
-    </div>
-    <div class="game-details">
-        <div class="game-collage">
-            <div id="videoPreviewContainer" class="preview-container">
-                <iframe id="youtubePlayer" width="100%" src="https://www.youtube.com/embed/6nUvWkD8rAE"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div id="imagePreviewContainer" class="image-preview-container" hidden="hidden">
-
-            </div>
-
-            <div class="thumbnail-container">
-                <div id="videoPreview"></div>
-
-                {% for img in game.multipleimagegame_set.all|dictsort:"sequence" %}
-                    <div><img src="{{ img.images.url }}" class="thumbnail" alt="Thumbnail"></div>
-                {% endfor %}
-            </div>
+    <div class="game">
+        <div class="path">
+            <a href="{% url 'games' %}">Games</a> >
+            <a href="{% url 'genre' game.genre.slug %}">{{ game.genre.name }}</a> >
+            <a href="{% url 'game' game.slug %}">{{ game.name }}</a>
         </div>
-        <div class="game-short-description">
-            <div class="image">
-                <img src="{{ game.main_photo.url }}" alt="{{ game.name }}">
-            </div>
-            <div class="text">
-                {{ game.short_description|safe }}
-                <hr>
-
-                <p class="p-release_date">Дата выхода: <span>{{ game.release_date }}</span></p>
-            </div>
+        <div class="name">
+            {{ game.name }}
         </div>
-    </div>
-
-    <div class="description">
-        {{ game.description|safe }}
-
-    </div>
-    <div class="steam">
-        <iframe class="steam-iframe" id="iframeSteam" src="{{ game.steam_widget_src }}" frameborder="0" width="646" height="190"></iframe>
-    </div>
-
-
-    <div class="system-requirements">
-        <div class="system">
-            <h3>Системные требования для {{ game.name }}</h3>
-            <div class="system-buttons">
-                {% for system in game.systemrequirements_set.all %}
-                    <button class="system-button" data-system="{{ system.operating_system_name }}">{{ system.operating_system_name }}</button>
-                {% endfor %}
-            </div>
-        </div>
-    <hr>
-    {% for system in game.systemrequirements_set.all %}
-        <div class="system-info" id="system-info-{{ system.operating_system_name }}">
-            <h4>Операционная система: {{ system.operating_system_name }}</h4>
-            <div class="requirements">
-                <div class="min-requirements">
-                    <h4>Минимальные требования:</h4>
-                    <div>{{ system.requirements | safe }}</div>
+        <div class="game-details">
+            <div class="game-collage">
+                <div id="videoPreviewContainer" class="preview-container">
+                    <iframe id="youtubePlayer" width="100%" src="https://www.youtube.com/embed/6nUvWkD8rAE"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
                 </div>
-                <div class="rec-requirements">
-                    <h4>Рекомендуемые требования:</h4>
-                    <div>{{ system.requirements_recommended | safe }}</div>
+                <div id="imagePreviewContainer" class="image-preview-container" hidden="hidden">
+
+                </div>
+                <div class="thumbnail-container">
+                    <div id="videoPreview"></div>
+                        {% for img in game.multipleimagegame_set.all|dictsort:"sequence" %}
+                            <div><img src="{{ img.images.url }}" class="thumbnail" alt="Thumbnail"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="game-short-description">
+                <div class="image">
+                    <img src="{{ game.main_photo.url }}" alt="{{ game.name }}">
+                </div>
+                <div class="text">
+                    {{ game.short_description|safe }}
+                    <hr>
+                    <p class="p-release_date">Дата выхода: <span>{{ game.release_date }}</span></p>
                 </div>
             </div>
         </div>
-    {% endfor %}
+
+        <div class="description">
+            {{ game.description|safe }}
+        </div>
+        <div class="steam">
+            <iframe class="steam-iframe" id="iframeSteam" src="{{ game.steam_widget_src }}" frameborder="0" width="646" height="190"></iframe>
+        </div>
+
+
+        <div class="system-requirements">
+            <div class="system">
+                <h3>Системные требования для {{ game.name }}</h3>
+                <div class="system-buttons">
+                    {% for system in game.systemrequirements_set.all %}
+                        <button class="system-button" data-system="{{ system.operating_system_name }}">{{ system.operating_system_name }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            <hr>
+            {% for system in game.systemrequirements_set.all %}
+                <div class="system-info" id="system-info-{{ system.operating_system_name }}">
+                    <h4>Операционная система: {{ system.operating_system_name }}</h4>
+                    <div class="requirements">
+                        <div class="min-requirements">
+                            <h4>Минимальные требования:</h4>
+                            <div>{{ system.requirements | safe }}</div>
+                        </div>
+                        <div class="rec-requirements">
+                            <h4>Рекомендуемые требования:</h4>
+                            <div>{{ system.requirements_recommended | safe }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
-
-
     <script src="{% static 'js/game_index.js' %}"></script>
     <script>
         // Глобальная переменная для операционной системы
         var selectedOperatingSystem = "{{ game.systemrequirements_set.all.first.operating_system_name }}";
         // Вызываем функцию для отображения информации о выбранной системе
         showSystemInfo(selectedOperatingSystem);
-
     </script>
 {% endblock %}
